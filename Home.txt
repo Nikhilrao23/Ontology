@@ -1,0 +1,35 @@
+<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/win.master"  CodeFile="Home.aspx.cs" Inherits="_Default" %>
+<asp:Content ID="content" ContentPlaceHolderID="home" runat="server">
+
+<asp:Panel style="position:absolute; top: 187px; left: 98px; height: 669px; width: 549px;" 
+        ID="Panel1" runat="server" ForeColor="#996633">
+<%--  <table>
+<tr>
+<td>--%><asp:Label ID="Label2" runat="server" Text=" Welcome," 
+ForeColor="#362C20" Font-Names="Verdana"></asp:Label>
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<asp:Label ID="Label3" runat="server" Text="This personalized ontology for web information gathering,User can 
+download the journals and give their feedback regarding particular journal. User 
+feedback is like positive, negative and neutral. Based on the feedback we 
+personalized the user." ForeColor="#362C20" Font-Names="Verdana"></asp:Label><br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<asp:Label
+            ID="Label4" runat="server" Text="User profiles represent the concept models possessed by users 
+when gathering web information.the below architecture gives full view of 
+personalized ontology system." ForeColor="#362C20" Font-Names="Verdana"></asp:Label>
+<br />
+<br />
+<asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" 
+ForeColor="#33CCFF" Text="Architecture:"></asp:Label>
+<br />
+<br />
+<br />
+<asp:Image ID="Image3" runat="server" Height="452px" 
+ImageUrl="~/images/new.jpg" Width="546px" /></td></tr></table>
+
+</asp:Panel>
+
+
+</asp:Content>

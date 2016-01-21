@@ -1,0 +1,113 @@
+using System;
+usingSystem.Data;
+usingSystem.Configuration;
+usingSystem.Linq;
+usingSystem.Web;
+usingSystem.Web.Security;
+usingSystem.Web.UI;
+usingSystem.Web.UI.HtmlControls;
+usingSystem.Web.UI.WebControls;
+usingSystem.Web.UI.WebControls.WebParts;
+usingSystem.Xml.Linq;
+usingSystem.Data.SqlClient;
+usingSystem.Text;
+usingSystem.Security.Cryptography;
+
+/// <summary>
+/// Summary description for encryption
+/// </summary>
+public class encryption
+{
+SqlConnectioncn = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+SqlCommand com,cmd1;
+
+string id;
+int fid;
+	public encryption()
+	{
+
+        //
+		// TODO: Add constructor logic here
+		//
+	}
+
+public static string Encrypt(string toEncrypt, bool useHashing)
+    {
+byte[] keyArray;
+byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
+System.Configuration.AppSettingsReadersettingsReader = new AppSettingsReader();
+string key = (string)settingsReader.GetValue("connection", typeof(string));
+if (useHashing)
+        {
+            MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+hashmd5.Clear();
+        }
+else
+keyArray = UTF8Encoding.UTF8.GetBytes(key);
+
+TripleDESCryptoServiceProvidertdes = new TripleDESCryptoServiceProvider();
+tdes.Key = keyArray;
+tdes.Mode = CipherMode.ECB;
+tdes.Padding = PaddingMode.PKCS7;
+ICryptoTransformcTransform = tdes.CreateEncryptor();
+byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+tdes.Clear();
+return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+
+        }   
+public static string Decrypt(string cipherString, bool useHashing)
+    {
+byte[] keyArray;
+byte[] toEncryptArray = Convert.FromBase64String(cipherString);
+System.Configuration.AppSettingsReadersettingsReader = new AppSettingsReader();
+string key = (string)settingsReader.GetValue("connection", typeof(String));
+if (useHashing)
+        {
+            MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+hashmd5.Clear();
+
+        }
+else
+keyArray = UTF8Encoding.UTF8.GetBytes(key);
+
+TripleDESCryptoServiceProvidertdes = new TripleDESCryptoServiceProvider();
+tdes.Key = keyArray;
+tdes.Mode = CipherMode.ECB;
+tdes.Padding = PaddingMode.PKCS7;
+
+ICryptoTransformcTransform = tdes.CreateDecryptor();
+byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);                     
+tdes.Clear();
+return UTF8Encoding.UTF8.GetString(resultArray);
+    }
+public  intuserid()
+    {
+cn.Open();
+        cmd1 = new SqlCommand("select max(userid) from reg", cn);
+id = Convert.ToString(cmd1.ExecuteScalar());
+if (id == "")
+        {
+fid = 1;
+        }
+else
+        {
+fid = Convert.ToInt16(id);
+fid = fid + 1;
+        }
+cn.Close();
+return fid;
+    }
+
+publicDataSetcheckuser(string usr,stringpsw)
+    {
+cn.Open();
+SqlDataAdapteradt = new SqlDataAdapter("select username,pwd from reg where username='" + usr + "' and pwd='" + psw + "'", cn);
+DataSet da = new DataSet();
+adt.Fill(da);
+cn.Close();
+return da;
+
+    }
+}

@@ -1,0 +1,33 @@
+<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/usermaster.master" CodeFile="positivesearch.aspx.cs" Inherits="positivesearch" %>
+
+<asp:Content ID="content" ContentPlaceHolderID="positivesearch" runat="server">
+<body>
+<form id="form1" runat="server">
+<div>
+<asp:Panel style="position:absolute; top: 204px; left: 146px; width: 471px;" ID="Panel1" 
+runat="server">
+
+<table align="center" width="950" bgcolor="#F2F2F2" >
+
+<tr><td class="style15" align="left">
+<asp:TextBox
+    ID="txt_keyword" CssClass="text1" runat="server" Width="396px"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;
+<asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Back" />
+&nbsp;&nbsp;
+<asp:Label ID="lbl_error" runat="server" Font-Bold="True" Font-Names="Verdana" 
+                 Font-Size="Small" ForeColor="Red"></asp:Label>
+<asp:Label ID="lbl_entxt" runat="server"></asp:Label>
+<asp:Label ID="lbl_text" runat="server"></asp:Label>
+</td></tr>
+
+<td class="style22" align="left" valign="top" id="downloadfiles" runat="server" style="font-size:large; font-family:Verdana;">
+</td>
+<tr><td class="style13" align="left" id="newgrid" runat="server">
+</td></tr>
+</table>
+</asp:Panel>
+</div>
+
+</form>
+</body></html></asp:Content>
